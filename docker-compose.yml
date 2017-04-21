@@ -1,0 +1,42 @@
+version: '2'
+services:
+  cache:
+    image: redis:3.0.7-alpine
+    expose:
+      - 6379
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=squashio
+      - POSTGRES_PASSWORD=wQ[MfwhvVn2WXu28D
+      - POSTGRES_DB=squash_development
+    expose:
+      - 5432
+  backend:
+    image: christopherhein/squash-io
+    build: .
+    tty: true
+    stdin_open: true
+    environment:
+      - PORT0=3000
+      - POSTGRES_USER=squashio
+      - POSTGRES_PASSWORD=WVvnDK6Mdka6ftKeTh4k
+      - POSTGRES_HOST=db
+      - REDIS_HOST=cache
+      - PASSWORD_BASE64_ENCODED=password
+      - MAIL_FROM_ADDRESS=example@example.com
+      - MAIL_DOMAIN=example.com
+      - MAIL_SMTP_ADDRESS=smtp.gmail.com
+      - MAIL_PORT=465
+      - MAIL_USER_NAME=example@example.com
+      - MAIL_PASSWORD=hobo4556
+      - API_HOST=https://squash.example.com
+      - HOST=squash.example.com
+      - SQUASH_API_KEY=YOUR_PRODUCTION_SQUASH_API_KEY
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+      - cache

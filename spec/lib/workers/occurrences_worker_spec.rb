@@ -117,7 +117,7 @@ RSpec.describe OccurrencesWorker do
                                               "faulted"   => true,
                                               "backtrace" => [
                                                   {
-                                                      "url"     => "http://localhost:3000/assets/vendor.js",
+                                                      "url"     => "http://localhost:#{ENV['PORT0']}/assets/vendor.js",
                                                       "line"    => 11671,
                                                       "symbol"  => "?",
                                                       "context" => nil,
@@ -130,7 +130,7 @@ RSpec.describe OccurrencesWorker do
                                       "occurred_at"    => "2014-05-26T22:43:31Z",
                                       "schema"         => "http",
                                       "host"           => "localhost",
-                                      "port"           => "3000",
+                                      "port"           => ENV['PORT0'].to_s,
                                       "path"           => "/admin",
                                       "query"          => "",
                                       "user_agent"     => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0) Gecko/20100101 Firefox/28.0",

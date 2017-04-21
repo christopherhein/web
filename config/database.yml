@@ -1,24 +1,22 @@
-development:
+---
+default: &default
   adapter: postgresql
-  encoding: utf8
-  host: localhost
-  username: squash
-  password:
+  encoding: unicode
+  charset: UTF8
+  port: 5432
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  
+development:
+  <<: *default
   database: squash_development
 
 test:
-  adapter: postgresql
-  encoding: utf8
-  host: localhost
-  username: squash
-  password:
+  <<: *default
   database: squash_test
 
 production:
-  adapter: postgresql
-  encoding: utf8
-  host: localhost
-  username: squash
-  password:
+  <<: *default
   database: squash_production
   pool: 30
